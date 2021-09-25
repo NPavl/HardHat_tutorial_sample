@@ -3,6 +3,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+import "hardhat/console.sol";
 
 // This is the main building block for smart contracts.
 contract Token {
@@ -26,6 +27,7 @@ contract Token {
      * The `constructor` is executed only once when the contract is created.
      */
     constructor() {
+         
         // The totalSupply is assigned to transaction sender, which is the account
         // that is deploying the contract.
         balances[msg.sender] = totalSupply;
@@ -39,6 +41,8 @@ contract Token {
      * the contract.
      */
     function transfer(address to, uint256 amount) external {
+        console.log("Sender balance is %s tokens", balances[msg.sender]);
+        console.log("Trying to send %s tokens to %s", amount, to);
         // Check if the transaction sender has enough tokens.
         // If `require`'s first argument evaluates to `false` then the
         // transaction will revert.
